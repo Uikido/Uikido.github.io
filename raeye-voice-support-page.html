@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raeye Voice Support</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f8fd;
+      --surface: #ffffff;
+      --surface-soft: #eef5ff;
+      --border: #e2ebf6;
+      --text: #243247;
+      --muted: #70819a;
+      --primary: #5e9ef7;
+      --primary-deep: #3d7ede;
+      --primary-soft: #e9f2ff;
+      --shadow: 0 14px 32px rgba(86, 118, 160, 0.10);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --content: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Nunito', sans-serif;
+      background: radial-gradient(circle at top left, #f9fbff 0%, #f4f8fd 45%, #f1f6fc 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--primary-deep);
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 2px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    .wrap,
+    .hero-inner,
+    .layout {
+      width: min(calc(100% - 32px), var(--content));
+      margin: 0 auto;
+    }
+
+    .wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 0;
+    }
+
+    .app-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, #72b5ff 0%, #4d90f0 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 10px 18px rgba(77, 144, 240, 0.24);
+      flex: none;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1.55rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+    }
+
+    .brand-subtitle {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.2;
+    }
+
+    .hero {
+      padding: 34px 0 18px;
+    }
+
+    .hero-inner {
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,252,255,0.98));
+      border: 1px solid rgba(226, 235, 246, 0.95);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .eyebrow,
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary-deep);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow { margin-bottom: 14px; }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 3vw, 3.1rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 760px;
+      color: #56667d;
+      font-size: 1.04rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 28px;
+      padding: 14px 0 60px;
+      align-items: start;
+    }
+
+    main {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      padding: 32px;
+    }
+
+    aside {
+      display: grid;
+      gap: 18px;
+      position: sticky;
+      top: 96px;
+    }
+
+    .side-card {
+      background: rgba(255,255,255,0.90);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 22px;
+      box-shadow: 0 10px 24px rgba(123, 146, 181, 0.08);
+    }
+
+    section + section {
+      margin-top: 34px;
+      padding-top: 34px;
+      border-top: 1px solid #edf2f8;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.8rem, 2.2vw, 2.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 1.32rem;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    p {
+      margin: 0 0 16px;
+      font-size: 1.02rem;
+      color: #3c4a5f;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 22px;
+      color: #3c4a5f;
+    }
+
+    li + li { margin-top: 8px; }
+
+    .feature-grid,
+    .qa-grid,
+    .info-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .feature-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .qa-grid,
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      background: #fbfdff;
+      border: 1px solid #eaf0f7;
+      border-radius: var(--radius-lg);
+      padding: 18px;
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .info-box {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, #f5f9ff 0%, #edf4ff 100%);
+      border: 1px solid #dce8fd;
+      color: #60738c;
+    }
+
+    .support-email {
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .side-card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .side-card li + li { margin-top: 8px; }
+
+    .footer-note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      aside {
+        position: static;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap,
+      .hero-inner,
+      .layout { width: min(calc(100% - 20px), var(--content)); }
+      .hero-inner,
+      main,
+      .side-card { padding: 22px 18px; }
+      h2 { font-size: 1.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="app-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="8.5" stroke="white" stroke-width="1.7" opacity="0.96"/>
+          <path d="M9 10.2C9 8.53 10.34 7.2 12 7.2C13.66 7.2 15 8.53 15 10.2C15 11.63 13.97 12.45 13.08 13.03C12.41 13.46 12 13.82 12 14.5V15" stroke="white" stroke-width="1.7" stroke-linecap="round"/>
+          <circle cx="12" cy="17.6" r="1" fill="white"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="brand-title">Raeye Voice</h2>
+        <p class="brand-subtitle">Bilingual educational support app</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Support Center</span>
+      <h1>Welcome to Raeye Voice Support</h1>
+      <p>
+        Raeye Voice is a bilingual educational app created to help children learn through interactive activities,
+        audio lessons, and visual learning experiences. This support page brings together help information,
+        app details, and quick ways to contact support in one clean place.
+      </p>
+    </div>
+  </section>
+
+  <div class="layout">
+    <main>
+      <section>
+        <h2>1. About the app</h2>
+        <p>
+          Raeye Voice is designed especially for young learners and children with special needs, including autism,
+          speech delay, and language learning difficulties. The app focuses on simple, engaging learning experiences
+          that are easy to explore with visual and touch-based interaction.
+        </p>
+        <div class="info-box">
+          The app is built for parents, teachers, therapists, and caregivers who want a child-friendly learning tool with bilingual and faith-based educational support.
+        </div>
+      </section>
+
+      <section>
+        <h2>2. Features</h2>
+        <div class="feature-grid">
+          <div class="card"><strong>Interactive learning games</strong><span>Activities designed to keep children engaged while supporting learning through play.</span></div>
+          <div class="card"><strong>Audio-supported activities</strong><span>Helpful voice and sound guidance for a more accessible learning experience.</span></div>
+          <div class="card"><strong>Bilingual learning support</strong><span>Content designed to support learning in more than one language.</span></div>
+          <div class="card"><strong>Special-needs-friendly design</strong><span>A softer, simpler interface intended to support children with different learning needs.</span></div>
+          <div class="card"><strong>Visual and touch-based interaction</strong><span>Easy interaction patterns that help children explore content more independently.</span></div>
+          <div class="card"><strong>Educational faith-based lessons</strong><span>Learning content that reflects the app’s educational and values-based direction.</span></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>3. Need help?</h2>
+        <p>
+          If you experience issues or have questions about the app, please contact support. For quicker help,
+          include your device model, iOS version, app version, and a short description of the problem.
+        </p>
+        <div class="card">
+          <strong>Support email</strong>
+          <div class="support-email"><a href="mailto:support@yourdomain.com">support@yourdomain.com</a></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>4. Frequently asked questions</h2>
+        <div class="qa-grid">
+          <div class="card">
+            <strong>Does the app require an internet connection?</strong>
+            <span>Most learning activities are designed to work offline after installation.</span>
+          </div>
+          <div class="card">
+            <strong>Is the app safe for children?</strong>
+            <span>Yes. Raeye Voice is designed for children and does not include advertising, chat features, or unsafe content.</span>
+          </div>
+          <div class="card">
+            <strong>Does the app collect personal information?</strong>
+            <span>Please refer to the Privacy Policy for detailed information.</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>5. Privacy and compatibility</h2>
+        <div class="info-grid">
+          <div class="card">
+            <strong>Privacy Policy</strong>
+            <a href="https://abili.raeyechildrenaid.org/abili-voice-privacy-policy.html" target="_blank" rel="noopener noreferrer">View the privacy policy</a>
+          </div>
+          <div class="card">
+            <strong>Compatibility</strong>
+            <span>Raeye Voice supports modern iPhone and iPad devices running recent versions of iOS.</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>6. Feedback</h2>
+        <p>
+          We welcome feedback from parents, teachers, and caregivers to improve the learning experience for children.
+          Thoughtful suggestions can help improve accessibility, clarity, and educational value over time.
+        </p>
+        <p class="footer-note">Thank you for using Raeye Voice.</p>
+      </section>
+    </main>
+
+    <aside>
+      <div class="side-card">
+        <span class="badge">Child-friendly</span>
+        <h3>Soft support layout</h3>
+        <p>
+          This version keeps the polished sidebar style from your privacy policy example, while using clearer support content based on your draft text.
+        </p>
+      </div>
+
+      <div class="side-card">
+        <h3>Quick contact</h3>
+        <ul>
+          <li><a href="mailto:support@yourdomain.com">support@yourdomain.com</a></li>
+          <li><a href="https://abili.raeyechildrenaid.org/abili-voice-privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="side-card">
+        <h3>Publishing note</h3>
+        <p>
+          You can rename this file to <strong>index.html</strong> before uploading it to your GitHub Pages repository if you want it to open automatically.
+        </p>
+        <p class="muted">Replace the placeholder support email with your real address before publishing.</p>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>
